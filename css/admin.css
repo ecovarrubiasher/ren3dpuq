@@ -1,0 +1,172 @@
+/* ===== Ren3D — admin panel styles ===== */
+
+.admin-body{min-height:100vh;}
+
+.admin-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 32px;
+  border-bottom:1px solid var(--card-border);
+  background:var(--bg-soft);
+}
+.admin-header-actions{display:flex; gap:10px;}
+
+.admin-main{
+  max-width:1000px;
+  margin:0 auto;
+  padding:40px 24px 80px;
+  display:grid;
+  gap:32px;
+}
+
+.admin-form-card, .admin-list-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  padding:28px;
+}
+
+.admin-form-card h2, .admin-list-card h2{
+  font-family:var(--font-display);
+  font-size:1.3rem;
+  text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.admin-form{display:flex; flex-direction:column; gap:16px;}
+.admin-form label{
+  display:flex; flex-direction:column; gap:6px;
+  font-size:.85rem; font-weight:600; color:var(--muted);
+}
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form input[type="file"],
+.admin-form textarea,
+.admin-form select{
+  background:var(--bg-soft);
+  border:1px solid var(--card-border);
+  border-radius:8px;
+  padding:10px 12px;
+  color:var(--white);
+  font-family:var(--font-body);
+  font-size:.95rem;
+}
+.admin-form textarea{resize:vertical;}
+.admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus{
+  outline:none; border-color:var(--red);
+}
+
+.admin-form-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:16px;
+}
+
+.admin-checkbox{
+  flex-direction:row !important; align-items:center; gap:8px !important;
+}
+.admin-checkbox input{width:auto;}
+
+.admin-img-preview{
+  width:120px; height:120px; border-radius:10px; overflow:hidden;
+  border:1px solid var(--card-border);
+}
+.admin-img-preview img{width:100%; height:100%; object-fit:cover;}
+
+.admin-form-actions{display:flex; gap:12px; margin-top:8px;}
+
+.admin-msg{
+  padding:10px 14px; border-radius:8px; font-size:.85rem; font-weight:600;
+}
+.admin-msg-ok{background:rgba(37,211,102,.12); color:var(--whatsapp);}
+.admin-msg-error{background:rgba(232,18,31,.12); color:var(--red);}
+
+.admin-form-inline{
+  flex-direction:row; gap:12px; align-items:flex-end;
+}
+.admin-form-inline input{flex:1;}
+
+.admin-category-list{margin-top:16px;}
+.admin-category-item{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px;
+  background:var(--bg-soft);
+  border:1px solid var(--card-border);
+  border-radius:10px;
+}
+.admin-category-item input{
+  flex:1;
+  background:var(--bg);
+  border:1px solid var(--card-border);
+  border-radius:8px;
+  padding:8px 10px;
+  color:var(--white);
+  font-size:.9rem;
+}
+.admin-category-item .btn{padding:8px 14px; font-size:.8rem; white-space:nowrap;}
+
+.admin-list{display:flex; flex-direction:column; gap:12px;}
+.admin-item{
+  display:flex; align-items:center; gap:16px;
+  padding:12px;
+  background:var(--bg-soft);
+  border:1px solid var(--card-border);
+  border-radius:10px;
+}
+.admin-item-media{
+  width:56px; height:56px; border-radius:8px; overflow:hidden; flex-shrink:0;
+  background:var(--bg);
+  display:flex; align-items:center; justify-content:center;
+}
+.admin-item-media img{width:100%; height:100%; object-fit:cover;}
+.admin-item-icon{font-size:1.6rem;}
+.admin-item-body{flex:1; display:flex; flex-direction:column; gap:2px; min-width:0;}
+.admin-item-body strong{font-size:.95rem;}
+.admin-item-body span{font-size:.8rem; color:var(--muted); text-transform:capitalize;}
+.admin-item-actions{display:flex; gap:8px; flex-shrink:0;}
+.admin-item-actions .btn{padding:8px 14px; font-size:.8rem;}
+.admin-delete-btn{background:transparent; border:1px solid var(--card-border); color:var(--red);}
+.admin-delete-btn:hover{border-color:var(--red);}
+
+@media (max-width:640px){
+  .admin-form-row{grid-template-columns:1fr;}
+  .admin-item{flex-wrap:wrap;}
+}
+
+.login-wrap{
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+}
+.login-card{
+  width:100%; max-width:360px;
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  padding:36px 28px;
+  display:flex; flex-direction:column; align-items:center; gap:18px;
+  text-align:center;
+}
+.login-logo{
+  width:64px; height:64px; border-radius:50%;
+  border:2px solid var(--red);
+  box-shadow:0 0 14px var(--red-glow);
+}
+.login-card h1{
+  font-family:var(--font-display);
+  font-size:1.4rem;
+  text-transform:uppercase;
+}
+.login-card label{
+  width:100%;
+  display:flex; flex-direction:column; gap:6px;
+  font-size:.85rem; font-weight:600; color:var(--muted);
+  text-align:left;
+}
+.login-card input{
+  background:var(--bg-soft);
+  border:1px solid var(--card-border);
+  border-radius:8px;
+  padding:12px;
+  color:var(--white);
+  font-size:1rem;
+}
+.login-card input:focus{outline:none; border-color:var(--red);}
+.login-card .btn{width:100%; justify-content:center;}

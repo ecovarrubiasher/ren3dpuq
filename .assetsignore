@@ -1,0 +1,10 @@
+node_modules/
+package.json
+package-lock.json
+wrangler.toml
+.assetsignore
+.claude/
+worker/
+schema.sql
+schema_categories.sql
+seed.sql

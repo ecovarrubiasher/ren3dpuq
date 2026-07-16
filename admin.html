@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Ren3D</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+<header class="admin-header">
+  <div class="logo">
+    <img src="images/logo.png" alt="Ren3D" class="logo-img">
+    <span class="logo-text"><span class="logo-wordmark">Panel Ren<span class="logo-accent">3D</span></span></span>
+  </div>
+  <div class="admin-header-actions">
+    <a href="/" class="btn btn-outline">Ver sitio</a>
+    <button type="button" id="logoutBtn" class="btn btn-outline">Cerrar sesión</button>
+  </div>
+</header>
+
+<main class="admin-main">
+  <section class="admin-form-card">
+    <h2 id="formTitle">Agregar producto</h2>
+    <form id="productForm" class="admin-form">
+      <input type="hidden" id="productId" value="">
+
+      <label>Nombre del producto
+        <input type="text" id="fTitle" required placeholder="Ej: Llavero corazón">
+      </label>
+
+      <label>Descripción
+        <textarea id="fDesc" rows="3" placeholder="Descripción corta del producto"></textarea>
+      </label>
+
+      <div class="admin-form-row">
+        <label>Categoría
+          <select id="fCategory"></select>
+        </label>
+        <label>Ícono (emoji de respaldo)
+          <input type="text" id="fIcon" maxlength="4" placeholder="🎁">
+        </label>
+      </div>
+
+      <label>Tags (separados por coma)
+        <input type="text" id="fTags" placeholder="Ej: Regalo, A pedido">
+      </label>
+
+      <div class="admin-form-row">
+        <label>Precio (número)
+          <input type="number" id="fPrice" placeholder="7000">
+        </label>
+        <label>Etiqueta de precio
+          <input type="text" id="fPriceLabel" placeholder="$7.000 o Consultar">
+        </label>
+      </div>
+
+      <label class="admin-checkbox">
+        <input type="checkbox" id="fPriceFrom">
+        Mostrar como "Desde"
+      </label>
+
+      <label>Foto del producto
+        <input type="file" id="fImage" accept="image/*">
+      </label>
+      <div id="imgPreviewWrap" class="admin-img-preview" hidden>
+        <img id="imgPreview" alt="Vista previa">
+      </div>
+
+      <div class="admin-form-actions">
+        <button type="submit" class="btn btn-primary" id="submitBtn">Agregar producto</button>
+        <button type="button" class="btn btn-outline" id="cancelEditBtn" hidden>Cancelar edición</button>
+      </div>
+      <p id="formMsg" class="admin-msg" hidden></p>
+    </form>
+  </section>
+
+  <section class="admin-form-card">
+    <h2>Categorías</h2>
+    <form id="categoryForm" class="admin-form admin-form-inline">
+      <input type="text" id="fCategoryLabel" placeholder="Nombre de la nueva categoría" required>
+      <button type="submit" class="btn btn-primary">Agregar categoría</button>
+    </form>
+    <p id="categoryMsg" class="admin-msg" hidden></p>
+    <div id="categoryList" class="admin-list admin-category-list"></div>
+  </section>
+
+  <section class="admin-list-card">
+    <h2>Productos (<span id="productCount">0</span>)</h2>
+    <div id="productList" class="admin-list"></div>
+  </section>
+</main>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

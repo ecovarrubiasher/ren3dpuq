@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "Read(//c/Users/EduS/AppData/Roaming/**)",
+      "Read(//c/Users/EduS/AppData/Local/**)",
+      "Read(//c/Users/EduS/Downloads/**)",
+      "Bash(find \"C:\\\\Users\\\\EduS\\\\AppData\\\\Local\\\\claude-cli-nodejs\" -type f -newermt \"2026-07-13 20:00\" 2>/dev/null | head -50)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" -o logo_raw.jpg \"https://instagram.fpuq4-1.fna.fbcdn.net/v/t51.82787-19/660547556_18073342082309350_1526936507365697715_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDI0LmMyIn0&_nc_ht=instagram.fpuq4-1.fna.fbcdn.net&_nc_cat=110&_nc_oc=Q6cZ2gEG3V56myEgTVRsY_-duCCcsnAO-4V0QPdEqgJ6_ZjKihAw6SsvSR0YuHz9xWsSAAg&_nc_ohc=wCcT5gBCaPUQ7kNvwENToX5&_nc_gid=nRMCglx0mVvM-sL7nQO2Fw&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AQDghMgjZTfKu96CyrkDSJvTXaecqOIPOinSF0TqfKrUCg&oe=6A5B6CB9&_nc_sid=8b3546\")",
+      "Bash(python3 -c ' *)",
+      "Bash(rm logo_raw.jpg)",
+      "Bash(rm logo.jpeg)",
+      "Bash(python3)",
+      "Bash(npx wrangler *)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(Get-Command winget -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command choco -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-Command scoop -ErrorAction SilentlyContinue)",
+      "PowerShell(winget install OpenJS.NodeJS.LTS --silent --accept-package-agreements --accept-source-agreements)",
+      "PowerShell($env:Path += \";C:\\\\Program Files\\\\nodejs\"; node --version; npm --version)",
+      "Bash(python3 \"C:\\\\Users\\\\EduS\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-EduS-Documents-ren3dpuq\\\\91c9b4ea-1b7a-44d4-8606-895b3ca1b7e6\\\\scratchpad\\\\gen_seed.py\")",
+      "Bash(PATH='/c/Program Files/nodejs:__TRACKED_VAR__' npx wrangler secret put ADMIN_PASSWORD)",
+      "Bash(PATH='/c/Program Files/nodejs:__TRACKED_VAR__' npx wrangler secret put ADMIN_SESSION_SECRET)",
+      "Bash(cat \"C:\\\\Users\\\\EduS\\\\AppData\\\\Roaming\\\\xdg.config\\\\.wrangler\\\\config\\\\default.toml\" 2>&1 | head -5)",
+      "Bash(curl -s -X GET https://api.cloudflare.com/client/v4/zones?name=ren3dpuq.cl -H 'Authorization: Bearer cfoat_CNo4lXCqCferWJ66XUutQMXrsDPdIOdZnhG_gDYfK2w.KcAe9mxSeR-vNhjK1MgNBHBFXbRVNmxAPJQOWjvmkYw' -H 'Content-Type: application/json')",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s -X POST https://api.cloudflare.com/client/v4/zones/1a34ccffb6d5163181a1898b098838d5/purge_cache -H 'Authorization: Bearer cfoat_CNo4lXCqCferWJ66XUutQMXrsDPdIOdZnhG_gDYfK2w.KcAe9mxSeR-vNhjK1MgNBHBFXbRVNmxAPJQOWjvmkYw' -H 'Content-Type: application/json' --data '{\"files\":[\"https://ren3dpuq.cl/gestion-x7q2k9\",\"https://ren3dpuq.cl/gestion-x7q2k9/\"]}')"
+    ]
+  }
+}
