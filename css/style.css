@@ -167,7 +167,7 @@ svg{width:20px; height:20px;}
 /* ===== Hero ===== */
 .hero{
   position:relative;
-  padding:120px 0 90px;
+  padding:120px 0 48px;
   overflow:hidden;
   text-align:center;
 }
@@ -206,7 +206,7 @@ svg{width:20px; height:20px;}
 }
 .hero-actions{
   display:flex; justify-content:center; gap:16px; flex-wrap:wrap;
-  margin-bottom:64px;
+  margin-bottom:40px;
 }
 .hero-stats{
   display:flex; justify-content:center; gap:56px; flex-wrap:wrap;
@@ -233,7 +233,7 @@ svg{width:20px; height:20px;}
 .section-desc{color:var(--muted);}
 
 /* ===== Catalog ===== */
-.catalog{padding:90px 0;}
+.catalog{padding:48px 0 90px;}
 
 .filters{
   display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
@@ -531,7 +531,7 @@ svg{width:20px; height:20px;}
 }
 
 @media (max-width: 520px){
-  .hero{padding:90px 0 60px;}
+  .hero{padding:90px 0 40px;}
   .hero-stats{gap:32px;}
   .header-actions .icon-btn{display:none;}
 }
