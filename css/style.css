@@ -12,8 +12,10 @@
   --muted: #9a9a9a;
   --whatsapp: #25D366;
   --radius: 14px;
-  --font-display: 'Anton', 'Arial Narrow', sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Russo One', 'Arial Narrow', sans-serif;
+  --font-body: 'Chakra Petch', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+  --font-kanji: 'Reggae One', serif;
 }
 
 *{box-sizing:border-box; margin:0; padding:0;}
@@ -113,7 +115,7 @@ svg{width:20px; height:20px;}
 }
 .logo-wordmark{display:inline-flex; align-items:center; gap:4px;}
 .logo-sub{
-  font-family:var(--font-body);
+  font-family:var(--font-kanji);
   font-size:.62rem;
   font-weight:600;
   letter-spacing:.35em;
@@ -178,6 +180,7 @@ svg{width:20px; height:20px;}
 .hero-inner{position:relative; z-index:1;}
 .hero-kicker{
   color:var(--red);
+  font-family:var(--font-mono);
   font-weight:700;
   letter-spacing:.15em;
   text-transform:uppercase;
@@ -218,7 +221,7 @@ svg{width:20px; height:20px;}
 /* ===== Section heading ===== */
 .section-heading{text-align:center; max-width:600px; margin:0 auto 44px;}
 .section-kicker{
-  color:var(--red); font-weight:700; letter-spacing:.15em;
+  color:var(--red); font-family:var(--font-mono); font-weight:700; letter-spacing:.15em;
   text-transform:uppercase; font-size:.8rem; margin-bottom:10px;
 }
 .section-heading h2, .custom-banner h2, .instagram-text h2{
@@ -296,6 +299,7 @@ svg{width:20px; height:20px;}
   background:rgba(10,10,10,.75);
   border:1px solid var(--card-border);
   color:var(--muted);
+  font-family:var(--font-mono);
   font-size:.7rem;
   font-weight:700;
   text-transform:uppercase;
@@ -324,8 +328,9 @@ svg{width:20px; height:20px;}
   gap:10px; margin-top:8px;
 }
 .product-price{
-  font-family:var(--font-display);
-  font-size:1.3rem;
+  font-family:var(--font-mono);
+  font-weight:700;
+  font-size:1.2rem;
   color:var(--red);
   letter-spacing:.02em;
 }
