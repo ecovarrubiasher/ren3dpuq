@@ -1,5 +1,5 @@
-const instagramUrl = "https://www.instagram.com/ren3dpuq/";
-const instagramDmUrl = "https://ig.me/m/ren3dpuq";
+const instagramUrl = "https://www.instagram.com/ren3d.studio/";
+const instagramDmUrl = "https://ig.me/m/ren3d.studio";
 
 const products = [
   {
@@ -192,7 +192,7 @@ export default function Home() {
       <footer className="footer shell">
         <a className="brand" href="#inicio"><img src="/ren3d-logo.jpeg" alt="Ren3D" /></a>
         <p>Impresiones 3D con estilo · Punta Arenas, Chile</p>
-        <a href={instagramUrl} target="_blank" rel="noreferrer">@ren3dpuq ↗</a>
+        <a href={instagramUrl} target="_blank" rel="noreferrer">@ren3d.studio ↗</a>
       </footer>
       <a className="floating-whatsapp" href={whatsappLink()} target="_blank" rel="noreferrer" aria-label="Escribir a Ren3D por WhatsApp">WA</a>
     </main>
