@@ -75,7 +75,10 @@
       "Bash(curl -s -o /dev/null -w \"localhost redirige: %{http_code} -> %{redirect_url}\\\\n\" http://localhost:5000/)",
       "Skill(dataviz)",
       "Skill(dataviz:*)",
-      "Bash(cp \"/c/Users/EduS/AppData/Local/Temp/claude/C--Users-EduS-Documents-ren3dpuq/be20eeef-2409-4822-bfc6-30e5644893ed/scratchpad/dashboard-preview.html\" \"/c/Users/EduS/Documents/tic-tickets/static/dashboard-preview.html\" && echo ok)"
+      "Bash(cp \"/c/Users/EduS/AppData/Local/Temp/claude/C--Users-EduS-Documents-ren3dpuq/be20eeef-2409-4822-bfc6-30e5644893ed/scratchpad/dashboard-preview.html\" \"/c/Users/EduS/Documents/tic-tickets/static/dashboard-preview.html\" && echo ok)",
+      "Bash(npx.cmd wrangler deploy)",
+      "PowerShell(npx.cmd wrangler deploy)",
+      "PowerShell(npx wrangler deploy)"
     ]
   }
 }

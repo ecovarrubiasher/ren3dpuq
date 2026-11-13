@@ -9,3 +9,4 @@ schema.sql
 schema_categories.sql
 seed.sql
 .git/
+.wrangler/
