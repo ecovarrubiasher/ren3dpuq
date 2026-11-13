@@ -3,7 +3,7 @@
 :root { --ink:#070707; --panel:#101010; --panel-2:#171717; --paper:#f2f0ec; --white:#fff; --red:#f11224; --red-dark:#b70816; --muted:#9c9c9c; --line:rgba(255,255,255,.13); }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { margin:0; background:var(--ink); color:var(--white); font-family:var(--font-geist-sans),Arial,sans-serif; }
+body { margin:0; background:var(--ink); color:var(--white); font-family:var(--font-sans),Arial,sans-serif; }
 body::before { content:""; position:fixed; inset:0; z-index:-1; opacity:.22; pointer-events:none; background-image:radial-gradient(circle at 20% 10%,rgba(255,255,255,.12) 0 1px,transparent 1.5px),radial-gradient(circle at 80% 55%,rgba(255,255,255,.08) 0 1px,transparent 1.5px); background-size:9px 9px,13px 13px; }
 a { color:inherit; text-decoration:none; }
 img { display:block; max-width:100%; }
@@ -18,9 +18,9 @@ img { display:block; max-width:100%; }
 .nav-cta:hover { background:white; color:var(--ink); border-color:white; }
 .hero { min-height:760px; display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center; padding-block:74px 96px; overflow:hidden; }
 .hero-copy { position:relative; z-index:3; }
-.eyebrow { display:flex; gap:12px; align-items:center; text-transform:uppercase; font-family:var(--font-geist-mono); font-size:10px; font-weight:750; letter-spacing:.18em; margin:0 0 24px; color:#c8c8c8; }
+.eyebrow { display:flex; gap:12px; align-items:center; text-transform:uppercase; font-family:var(--font-mono),monospace; font-size:10px; font-weight:750; letter-spacing:.18em; margin:0 0 24px; color:#c8c8c8; }
 .eyebrow span { width:36px; height:3px; background:var(--red); transform:skewX(-35deg); }
-h1 { font-size:clamp(58px,7vw,94px); line-height:.91; letter-spacing:-.07em; margin:0; max-width:760px; font-weight:900; text-transform:uppercase; font-style:italic; }
+h1 { font-family:var(--font-display),sans-serif; font-size:clamp(52px,6.4vw,86px); line-height:.95; letter-spacing:-.02em; margin:0; max-width:760px; font-weight:400; text-transform:uppercase; font-style:italic; }
 h1 em { color:var(--red); font-style:inherit; text-shadow:3px 3px 0 rgba(255,255,255,.13); }
 .lead { font-size:17px; line-height:1.7; max-width:590px; color:#b8b8b8; margin:32px 0; }
 .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
@@ -30,7 +30,7 @@ h1 em { color:var(--red); font-style:inherit; text-shadow:3px 3px 0 rgba(255,255
 .primary:hover { background:white; color:var(--ink); }
 .secondary { border:1px solid rgba(255,255,255,.35); background:rgba(255,255,255,.04); }
 .secondary:hover { border-color:white; background:white; color:var(--ink); }
-.hero-notes { display:flex; flex-wrap:wrap; gap:12px 23px; margin-top:30px; font-family:var(--font-geist-mono); font-size:9px; text-transform:uppercase; letter-spacing:.07em; color:#8d8d8d; }
+.hero-notes { display:flex; flex-wrap:wrap; gap:12px 23px; margin-top:30px; font-family:var(--font-mono),monospace; font-size:9px; text-transform:uppercase; letter-spacing:.07em; color:#8d8d8d; }
 .hero-visual { position:relative; min-height:560px; isolation:isolate; }
 .hero-visual::before { content:""; position:absolute; width:430px; height:430px; right:8px; top:68px; border:78px solid var(--red); border-radius:50%; opacity:.95; }
 .hero-visual::after { content:""; position:absolute; inset:36px -80px auto 20px; height:1px; background:linear-gradient(90deg,transparent,var(--red),transparent); transform:rotate(-18deg); }
@@ -41,19 +41,19 @@ h1 em { color:var(--red); font-style:inherit; text-shadow:3px 3px 0 rgba(255,255
 .hero-card-main { width:365px; right:5px; top:0; transform:rotate(2.5deg); }
 .hero-card-main img { width:100%; aspect-ratio:1; object-fit:cover; filter:saturate(.92) contrast(1.06); }
 .hero-card-main figcaption { display:flex; justify-content:space-between; align-items:center; padding:17px 18px; border-top:3px solid var(--red); }
-.hero-card-main figcaption span { font-family:var(--font-geist-mono); font-size:9px; color:#aaa; text-transform:uppercase; letter-spacing:.12em; }
+.hero-card-main figcaption span { font-family:var(--font-mono),monospace; font-size:9px; color:#aaa; text-transform:uppercase; letter-spacing:.12em; }
 .hero-card-main figcaption strong { font-size:12px; text-transform:uppercase; font-style:italic; }
 .hero-card-small { width:185px; bottom:12px; left:35px; transform:rotate(-5deg); box-shadow:8px 8px 0 var(--red); }
 .hero-card-small img { aspect-ratio:4/5; width:100%; object-fit:cover; object-position:center 42%; filter:saturate(.88) contrast(1.08); }
 .made-badge { position:absolute; right:-3px; bottom:35px; display:flex; align-items:center; gap:10px; background:white; color:var(--ink); padding:12px 18px; transform:skewX(-10deg); }
 .made-badge strong { color:var(--red); font-size:22px; }.made-badge span { font-size:8px; line-height:1.2; text-transform:uppercase; letter-spacing:.12em; }
-.hero-jp { position:absolute; left:-6px; top:76px; writing-mode:vertical-rl; font-size:14px; letter-spacing:.45em; color:rgba(255,255,255,.24); font-family:serif; }
-.marquee { overflow:hidden; white-space:nowrap; background:var(--red); color:white; padding:17px; font-family:var(--font-geist-mono); font-size:11px; font-weight:750; letter-spacing:.16em; text-align:center; transform:skewY(-1deg); }
+.hero-jp { position:absolute; left:-6px; top:76px; writing-mode:vertical-rl; font-size:14px; letter-spacing:.45em; color:rgba(255,255,255,.24); font-family:var(--font-kanji),serif; }
+.marquee { overflow:hidden; white-space:nowrap; background:var(--red); color:white; padding:17px; font-family:var(--font-mono),monospace; font-size:11px; font-weight:750; letter-spacing:.16em; text-align:center; transform:skewY(-1deg); }
 .marquee div { transform:skewY(1deg); }.marquee b { color:var(--ink); margin:0 31px; }
 .section { padding-block:125px; }
 .catalog { position:relative; }.catalog::before { content:"03"; position:absolute; right:0; top:76px; font-size:160px; font-weight:900; color:rgba(255,255,255,.025); font-style:italic; }
 .section-heading { display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:55px; position:relative; z-index:1; }
-.section-heading h2,.contact h2 { font-size:clamp(42px,5vw,68px); line-height:.94; letter-spacing:-.055em; margin:0; text-transform:uppercase; font-style:italic; }
+.section-heading h2,.contact h2 { font-family:var(--font-display),sans-serif; font-weight:400; font-size:clamp(38px,4.6vw,62px); line-height:.98; letter-spacing:-.02em; margin:0; text-transform:uppercase; font-style:italic; }
 .section-heading>p { max-width:400px; color:#929292; line-height:1.65; margin:0; font-size:13px; }
 .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
 .product-card { background:var(--panel); border:1px solid var(--line); overflow:hidden; transition:transform .25s,border-color .25s,box-shadow .25s; position:relative; }
@@ -63,25 +63,25 @@ h1 em { color:var(--red); font-style:inherit; text-shadow:3px 3px 0 rgba(255,255
 .product-image::after { content:""; position:absolute; inset:0; box-shadow:inset 0 -40px 50px rgba(0,0,0,.23); pointer-events:none; }
 .product-image img { width:100%; aspect-ratio:1.1; object-fit:cover; transition:transform .5s,filter .4s; filter:saturate(.82) contrast(1.05); }
 .product-card:hover .product-image img { transform:scale(1.045); filter:saturate(1.05) contrast(1.04); }
-.category { position:absolute; z-index:1; top:13px; left:13px; padding:8px 12px; background:var(--red); color:white; font-family:var(--font-geist-mono); font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:.11em; clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%); }
+.category { position:absolute; z-index:1; top:13px; left:13px; padding:8px 12px; background:var(--red); color:white; font-family:var(--font-mono),monospace; font-size:8px; font-weight:700; text-transform:uppercase; letter-spacing:.11em; clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%); }
 .product-info { padding:21px; }.product-title { display:flex; align-items:start; justify-content:space-between; gap:14px; }
-.product-title h3 { margin:0; font-size:17px; letter-spacing:-.03em; text-transform:uppercase; font-style:italic; }.product-title strong { color:var(--red); white-space:nowrap; font-family:var(--font-geist-mono); font-size:13px; }
+.product-title h3 { margin:0; font-family:var(--font-display),sans-serif; font-weight:400; font-size:17px; letter-spacing:0; text-transform:uppercase; font-style:italic; }.product-title strong { color:var(--red); white-space:nowrap; font-family:var(--font-mono),monospace; font-size:13px; }
 .product-info p { color:#8f8f8f; min-height:46px; line-height:1.55; font-size:12px; }
 .product-actions { display:flex; justify-content:space-between; align-items:center; gap:10px; padding-top:14px; border-top:1px solid var(--line); font-size:10px; font-weight:800; }
 .product-actions>span { color:#6f6f6f; text-transform:uppercase; letter-spacing:.1em; }.order-links { display:flex; gap:6px; }
 .order-links a { padding:8px 10px; border:1px solid rgba(255,255,255,.3); text-transform:uppercase; font-size:9px; transition:.2s; }.order-links a:hover { background:white; color:var(--ink); border-color:white; }
 .order-links .whatsapp-link { background:#25d366; color:#061f0e; border-color:#25d366; }.order-links .whatsapp-link:hover { background:#20bd5b; color:#061f0e; border-color:#20bd5b; }
 .catalog-note { margin-top:22px; background:var(--red); color:white; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:25px; position:relative; overflow:hidden; }
-.catalog-note::after { content:"蓮工房"; position:absolute; right:30%; top:-16px; font-family:serif; font-size:85px; color:rgba(0,0,0,.1); white-space:nowrap; }.catalog-note p { margin:0; line-height:1.45; position:relative; z-index:1; }
+.catalog-note::after { content:"蓮工房"; position:absolute; right:30%; top:-16px; font-family:var(--font-kanji),serif; font-size:85px; color:rgba(0,0,0,.1); white-space:nowrap; }.catalog-note p { margin:0; line-height:1.45; position:relative; z-index:1; }
 .dark { background:var(--ink); color:white; border:1px solid var(--ink); }.dark span { color:var(--red); }.catalog-note-actions { display:flex; gap:9px; flex-wrap:wrap; justify-content:flex-end; position:relative; z-index:1; }
 .whatsapp { background:#25d366; border:1px solid #25d366; color:#061f0e; }.whatsapp:hover { background:white; color:var(--ink); }
 .process { background:var(--paper); color:var(--ink); position:relative; clip-path:polygon(0 3%,100% 0,100% 97%,0 100%); padding-block:150px; }
 .process::before { content:"REN3D"; position:absolute; right:-40px; top:35px; font-size:180px; font-weight:900; font-style:italic; color:rgba(0,0,0,.035); }.process .eyebrow { color:#555; }.process .eyebrow span { background:var(--red); }
 .steps { display:grid; grid-template-columns:repeat(4,1fr); border-top:2px solid var(--ink); }
 .steps article { padding:28px 28px 10px 0; border-right:1px solid rgba(0,0,0,.18); min-height:230px; }.steps article+article { padding-left:28px; }
-.steps span { display:inline-block; background:var(--red); color:white; padding:6px 9px; font-family:var(--font-geist-mono); font-size:10px; transform:skewX(-9deg); }.steps h3 { font-size:20px; margin:55px 0 12px; text-transform:uppercase; font-style:italic; }.steps p { color:#666; font-size:12px; line-height:1.65; }
+.steps span { display:inline-block; background:var(--red); color:white; padding:6px 9px; font-family:var(--font-mono),monospace; font-size:10px; transform:skewX(-9deg); }.steps h3 { font-family:var(--font-display),sans-serif; font-weight:400; font-size:20px; margin:55px 0 12px; text-transform:uppercase; font-style:italic; }.steps p { color:#666; font-size:12px; line-height:1.65; }
 .contact-card { background:var(--panel); border:1px solid var(--line); padding:72px; display:grid; grid-template-columns:1.2fr .8fr; align-items:center; gap:50px; position:relative; overflow:hidden; }
-.contact-card::before { content:""; position:absolute; width:330px; height:330px; border:62px solid var(--red); border-radius:50%; right:-150px; top:-180px; opacity:.85; }.contact-card::after { content:"蓮工房"; position:absolute; left:60px; bottom:-38px; font-family:serif; font-size:100px; color:rgba(255,255,255,.025); }
+.contact-card::before { content:""; position:absolute; width:330px; height:330px; border:62px solid var(--red); border-radius:50%; right:-150px; top:-180px; opacity:.85; }.contact-card::after { content:"蓮工房"; position:absolute; left:60px; bottom:-38px; font-family:var(--font-kanji),serif; font-size:100px; color:rgba(255,255,255,.025); }
 .contact h2 em { color:var(--red); font-style:inherit; }.contact-actions { display:flex; flex-direction:column; gap:12px; position:relative; z-index:1; }.contact-actions small { color:#737373; text-align:center; text-transform:uppercase; letter-spacing:.08em; font-size:8px; }
 .footer { min-height:132px; display:grid; grid-template-columns:1fr 1fr 1fr; align-items:center; border-top:1px solid var(--line); font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:#777; }.footer .brand { width:145px; height:48px; }.footer p { text-align:center; }.footer>a:last-child { text-align:right; color:white; font-weight:800; }
 .floating-whatsapp { display:none; position:fixed; right:18px; bottom:18px; z-index:20; width:56px; height:56px; border-radius:50%; background:#25d366; color:#06250f; place-items:center; font-weight:900; border:2px solid white; box-shadow:0 8px 24px rgba(0,0,0,.45); }
