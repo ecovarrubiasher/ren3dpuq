@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Chakra_Petch, JetBrains_Mono, Reggae_One, Russo_One } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// Títulos: Russo One · Textos: Chakra Petch · Etiquetas: JetBrains Mono · Kanji: Reggae One
+const display = Russo_One({ variable: "--font-display", weight: "400", subsets: ["latin"] });
+const sans = Chakra_Petch({ variable: "--font-sans", weight: ["400", "500", "600", "700"], style: ["normal", "italic"], subsets: ["latin"] });
+const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
+const kanji = Reggae_One({ variable: "--font-kanji", weight: "400", subsets: ["latin"], preload: false });
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -27,5 +30,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="es"><body className={`${geistSans.variable} ${geistMono.variable}`}>{children}</body></html>;
+  return <html lang="es"><body className={`${display.variable} ${sans.variable} ${mono.variable} ${kanji.variable}`}>{children}</body></html>;
 }
