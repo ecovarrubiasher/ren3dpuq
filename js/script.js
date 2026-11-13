@@ -191,12 +191,55 @@ function initSakuraPetals(){
   requestAnimationFrame(tick);
 }
 
+function initLightbox(){
+  const grid = document.getElementById("productGrid");
+  if (!grid) return;
+
+  const lb = document.createElement("div");
+  lb.className = "lightbox";
+  lb.setAttribute("role", "dialog");
+  lb.setAttribute("aria-modal", "true");
+  lb.innerHTML = `
+    <button class="lightbox-close" aria-label="Cerrar">&times;</button>
+    <img alt="">
+    <p class="lightbox-caption"></p>
+  `;
+  document.body.appendChild(lb);
+
+  const imgEl = lb.querySelector("img");
+  const caption = lb.querySelector(".lightbox-caption");
+
+  function close(){
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+    imgEl.src = "";
+  }
+
+  lb.addEventListener("click", e => {
+    if (e.target !== imgEl) close();
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && lb.classList.contains("open")) close();
+  });
+
+  grid.addEventListener("click", e => {
+    const img = e.target.closest(".product-img");
+    if (!img || img.style.display === "none") return;
+    imgEl.src = img.src;
+    imgEl.alt = img.alt;
+    caption.textContent = img.alt;
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   await loadCategories();
   loadProducts();
   initMobileMenu();
   initLogoFallbacks();
   initSakuraPetals();
+  initLightbox();
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });

@@ -294,6 +294,39 @@ svg{width:20px; height:20px;}
 .product-media.no-image img{display:none;}
 .product-media:not(.no-image) .media-fallback{display:none;}
 
+.product-media .product-img{cursor:zoom-in;}
+
+/* ===== Lightbox ===== */
+.lightbox{
+  position:fixed; inset:0; z-index:300;
+  display:none; align-items:center; justify-content:center;
+  flex-direction:column; gap:16px;
+  background:rgba(5,5,5,.93);
+  padding:32px 20px 56px;
+  backdrop-filter:blur(4px);
+}
+.lightbox.open{display:flex;}
+.lightbox img{
+  max-width:min(92vw, 900px); max-height:80vh;
+  object-fit:contain;
+  border-radius:12px;
+  box-shadow:0 24px 70px rgba(0,0,0,.65);
+}
+.lightbox-caption{
+  color:var(--muted);
+  font-size:.95rem;
+  text-align:center;
+  max-width:80vw;
+}
+.lightbox-close{
+  position:absolute; top:14px; right:20px;
+  background:none; border:none;
+  color:#fff; font-size:2.4rem; line-height:1;
+  cursor:pointer; padding:6px;
+  transition:color .15s ease;
+}
+.lightbox-close:hover{color:var(--red);}
+
 .product-badge{
   position:absolute; top:12px; left:12px;
   background:rgba(10,10,10,.75);
