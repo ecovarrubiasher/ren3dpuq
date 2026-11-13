@@ -37,7 +37,7 @@ Dueño: Eduardo (cuenta Cloudflare: ecovarrubias.her@gmail.com).
 - Cabeceras de seguridad (`_headers`): CSP, X-Frame-Options, HSTS, etc.
 - SEO: `robots.txt`, `sitemap.xml`, datos estructurados (JSON-LD), meta tags Open Graph.
 - Google Search Console y Google Business Profile ya verificados por el dueño.
-- WhatsApp: +56 9 7998 1682. Instagram: @ren3dpuq.
+- WhatsApp: +56 9 7998 1682. Instagram: @ren3d.studio.
 
 ## Cómo seguir trabajando
 

@@ -165,7 +165,7 @@ function initSakuraPetals(){
     ctx.fillStyle = p.color;
     ctx.globalAlpha = 0.55;
     ctx.shadowColor = "rgba(232,18,31,0.5)";
-    ctx.shadowBlur = 6 * devicePixelRatio;
+    ctx.shadowBlur = 6 * devicePixelRatio;          
     ctx.beginPath();
     ctx.moveTo(0, -p.size / 2);
     ctx.quadraticCurveTo(p.size / 2, -p.size / 2, 0, p.size / 2);
