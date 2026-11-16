@@ -47,6 +47,7 @@
   var tab = "resumen";
   var editing = null;
   var started = false;
+  var loaded = false;
   var money = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
 
   function q(id) { return document.getElementById(id); }
@@ -99,7 +100,7 @@
   }
 
   function load() {
-    return api("GET", DATA_API).then(function (payload) { data = payload; render(); })
+    return api("GET", DATA_API).then(function (payload) { data = payload; loaded = true; render(); })
       .catch(function (error) { showError(error.message); });
   }
 
@@ -330,6 +331,10 @@
         onclick: function () { tab = item[0]; editing = null; clearError(); render(); } });
     }));
     var view = q("ventasView");
+    if (!loaded) {
+      view.replaceChildren(el("p", { class: "mute", text: "Cargando…" }));
+      return;
+    }
     if (tab === "ventas") renderVentas(view);
     else if (tab === "compras") renderCompras(view);
     else if (tab === "rollos") renderRollos(view);
