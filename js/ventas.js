@@ -157,7 +157,7 @@
       stat("Ventas cobradas", clp(r.cobrado), r.pedidos + (r.pedidos === 1 ? " pedido · " : " pedidos · ") + r.productos + " productos"),
       stat("Ventas en curso", clp(r.enCurso), "Por cobrar"),
       stat("Total comprado", clp(r.comprado), "Incluye " + clp(r.envios) + " en envíos"),
-      stat("Ventas menos compras", clp(balance), "Cobrado menos todo lo comprado", balance >= 0 ? "v-pos" : "v-neg"),
+      stat("Flujo de caja", clp(balance), "Dinero que entró menos el que salió", balance >= 0 ? "v-pos" : "v-neg"),
       stat("Costo del filamento", r.kg > 0 ? clp(Math.round(r.costoKg)) + " / kg" : "—", r.kg + " kg comprados, con envío"),
       stat("Margen sobre material", r.margen === null ? "—" : r.margen + "%",
         r.medidas ? "Según " + r.medidas + (r.medidas === 1 ? " venta" : " ventas") + " con gramos anotados" : "Anota los gramos en las ventas",
