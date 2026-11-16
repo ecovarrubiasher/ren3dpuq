@@ -1,10 +1,13 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+import { handleAdmin } from "./admin";
 
 interface Env {
   ASSETS: Fetcher;
   DB: D1Database;
+  /** Clave del panel privado /admin. Se define como secreto en Cloudflare. */
+  ADMIN_PASSWORD?: string;
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
@@ -28,6 +31,11 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+
+    // Panel privado de ventas, compras y stock: se atiende antes que el sitio público.
+    if (url.pathname === "/admin" || url.pathname.startsWith("/admin/")) {
+      return handleAdmin(request, env);
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
