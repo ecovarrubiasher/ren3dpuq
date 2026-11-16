@@ -1,10 +1,13 @@
 // ===== Ren3D — Worker: static site + products API + admin panel =====
 
-import { handleAdmin } from "./admin";
-
-function isAdminPath(pathname) {
-  return pathname === "/admin" || pathname.startsWith("/admin/");
-}
+import {
+  ensureVentasSchema,
+  readVentasData,
+  createVentasRow,
+  updateVentasRow,
+  deleteVentasRow,
+  VentasInputError,
+} from "./ventas";
 
 const ADMIN_PATH = "/gestion-x7q2k9";
 const SESSION_COOKIE = "ren3d_session";
@@ -236,6 +239,39 @@ async function handleServeUpload(key, env) {
   });
 }
 
+async function handleVentasApi(request, env, path) {
+  const method = request.method;
+  const db = env.ren3dpuq_db;
+  await ensureVentasSchema(db);
+
+  try {
+    if (path === `${ADMIN_PATH}/api/ventas-data` && method === "GET") {
+      return json(await readVentasData(db));
+    }
+    const match = path.match(new RegExp(`^${ADMIN_PATH}/api/ventas/(ventas|compras|rollos)(?:/(\\d+))?$`));
+    if (match) {
+      const table = match[1];
+      const id = match[2] ? Number(match[2]) : null;
+      if (method === "POST" && id === null) {
+        return json(await createVentasRow(db, table, await request.json()), { status: 201 });
+      }
+      if (method === "PUT" && id !== null) {
+        return json(await updateVentasRow(db, table, id, await request.json()));
+      }
+      if (method === "DELETE" && id !== null) {
+        return json(await deleteVentasRow(db, table, id));
+      }
+      return json({ error: "Metodo no permitido" }, { status: 405 });
+    }
+  } catch (error) {
+    if (error instanceof VentasInputError) return json({ error: error.message }, { status: 400 });
+    console.error("ventas", error);
+    return json({ error: "Error interno" }, { status: 500 });
+  }
+
+  return json({ error: "Ruta no encontrada" }, { status: 404 });
+}
+
 async function handleAdminApi(request, env, path) {
   const method = request.method;
 
@@ -309,11 +345,6 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // ---- new sales/purchases/filament panel, handled before anything else ----
-    if (isAdminPath(path)) {
-      return handleAdmin(request, env);
-    }
-
     // ---- public routes ----
     if (path === "/api/products" && request.method === "GET") {
       return json(await listProducts(env));
@@ -343,6 +374,9 @@ export default {
       }
       if (path.startsWith(`${ADMIN_PATH}/api/categories`)) {
         return handleCategoriesApi(request, env, path);
+      }
+      if (path.startsWith(`${ADMIN_PATH}/api/ventas`)) {
+        return handleVentasApi(request, env, path);
       }
       return handleAdminApi(request, env, path);
     }

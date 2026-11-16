@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="css/ventas.css">
 </head>
 <body class="admin-body">
 
@@ -25,7 +26,12 @@
   </div>
 </header>
 
-<main class="admin-main">
+<nav class="admin-tabs" id="adminTabs">
+  <button type="button" class="admin-tab active" data-tab="productos">Productos</button>
+  <button type="button" class="admin-tab" data-tab="ventas">Ventas</button>
+</nav>
+
+<main class="admin-main" id="tab-productos">
   <section class="admin-form-card">
     <h2 id="formTitle">Agregar producto</h2>
     <form id="productForm" class="admin-form">
@@ -97,6 +103,13 @@
   </section>
 </main>
 
+<main class="admin-main admin-ventas" id="tab-ventas" hidden>
+  <nav class="ventas-subnav" id="ventasSubnav"></nav>
+  <div id="ventasMsg" class="admin-msg hidden"></div>
+  <div id="ventasView"><p class="mute">Cargando…</p></div>
+</main>
+
 <script src="js/admin.js"></script>
+<script src="js/ventas.js"></script>
 </body>
 </html>

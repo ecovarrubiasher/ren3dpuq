@@ -296,4 +296,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await loadCategories();
   loadProducts();
+
+  let ventasStarted = false;
+  document.querySelectorAll(".admin-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".admin-tab").forEach((b) => b.classList.toggle("active", b === btn));
+      const tab = btn.dataset.tab;
+      q("tab-productos").hidden = tab !== "productos";
+      q("tab-ventas").hidden = tab !== "ventas";
+      if (tab === "ventas" && !ventasStarted) {
+        ventasStarted = true;
+        window.initVentasPanel();
+      }
+    });
+  });
 });

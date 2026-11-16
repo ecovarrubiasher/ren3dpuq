@@ -12,13 +12,6 @@ binding = "ren3dpuq_db"
 database_name = "ren3dpuq-db"
 database_id = "e43d39ca-bc44-44ed-b979-c98c6e270732"
 
-# Mismo D1 que ren3dpuq_db, con el nombre que espera worker/admin.ts
-# (panel de ventas/compras/filamento, portado de la rama panel-admin-ventas-compras).
-[[d1_databases]]
-binding = "DB"
-database_name = "ren3dpuq-db"
-database_id = "e43d39ca-bc44-44ed-b979-c98c6e270732"
-
 [[kv_namespaces]]
 binding = "ren3dpuq_images"
 id = "62de0812641b4570931f83a102a64eff"
