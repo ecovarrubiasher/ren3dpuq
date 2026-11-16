@@ -1,5 +1,11 @@
 // ===== Ren3D — Worker: static site + products API + admin panel =====
 
+import { handleAdmin } from "./admin";
+
+function isAdminPath(pathname) {
+  return pathname === "/admin" || pathname.startsWith("/admin/");
+}
+
 const ADMIN_PATH = "/gestion-x7q2k9";
 const SESSION_COOKIE = "ren3d_session";
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24; // 24h
@@ -302,6 +308,11 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
+
+    // ---- new sales/purchases/filament panel, handled before anything else ----
+    if (isAdminPath(path)) {
+      return handleAdmin(request, env);
+    }
 
     // ---- public routes ----
     if (path === "/api/products" && request.method === "GET") {
