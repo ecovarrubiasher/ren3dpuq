@@ -4,6 +4,11 @@
 
 .mute{color:var(--muted); font-size:.85rem;}
 
+/* .admin-main ya fija display:grid, lo que le gana a la regla por
+   defecto del navegador para [hidden]; sin esto, togglear hidden no
+   oculta nada. */
+.admin-main[hidden]{display:none;}
+
 .admin-tabs{
   display:flex; gap:8px;
   max-width:1000px; margin:24px auto 0; padding:0 24px;
