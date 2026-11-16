@@ -97,9 +97,9 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - [vinext Documentation](https://github.com/cloudflare/vinext)
 - [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
 
-## Panel privado (/admin)
+## Panel privado
 
-`/admin` es el panel interno de Ren3D para registrar ventas, compras de insumos
+El panel interno de Ren3D (por defecto en `/admin`) sirve para registrar ventas, compras de insumos
 y stock de filamento. Se atiende desde `worker/admin.ts`, antes del sitio
 público, y guarda los datos en la base D1 enlazada como `DB` (las tablas se
 crean solas la primera vez).
@@ -111,5 +111,9 @@ publica:
 npx wrangler secret put ADMIN_PASSWORD
 ```
 
-Sin ese secreto, o sin la base `DB` enlazada, `/admin` muestra un aviso y no
+Sin ese secreto, o sin la base `DB` enlazada, el panel muestra un aviso y no
 permite entrar. La clave nunca va en el código ni en el repositorio.
+
+Para usar una ruta distinta de `/admin`, define la variable `ADMIN_PATH` en el
+Worker (por ejemplo con `npx wrangler secret put ADMIN_PATH`). Así la ruta
+tampoco queda escrita en el repositorio.

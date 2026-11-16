@@ -79,7 +79,7 @@ export function adminMessagePage(nonce: string, title: string, message: string):
   );
 }
 
-export function adminLoginPage(nonce: string, errorCode: string | null): string {
+export function adminLoginPage(nonce: string, base: string, errorCode: string | null): string {
   const errors: Record<string, string> = {
     clave: "Clave incorrecta.",
     bloqueo: "Demasiados intentos. Espera 15 minutos.",
@@ -91,7 +91,7 @@ export function adminLoginPage(nonce: string, errorCode: string | null): string 
     `<main class="login"><div class="card">
 <h2>Panel Ren3D</h2>
 ${error}
-<form method="post" action="/admin/login">
+<form method="post" action="${base}/login">
 <label>Clave<input type="password" name="clave" autocomplete="current-password" required autofocus></label>
 <button class="primary" type="submit">Entrar</button>
 </form>
@@ -99,20 +99,20 @@ ${error}
   );
 }
 
-export function adminAppPage(nonce: string): string {
+export function adminAppPage(nonce: string, base: string): string {
   return page(
     nonce,
     "Ren3D · Panel",
     `<header>
 <h1>Ren<span>3D</span> · Panel</h1>
-<form method="post" action="/admin/logout"><button class="small" type="submit">Salir</button></form>
+<form method="post" action="${base}/logout"><button class="small" type="submit">Salir</button></form>
 </header>
 <main>
 <nav id="tabs"></nav>
 <div id="msg" class="msg hidden"></div>
 <div id="view"><p class="mute">Cargando…</p></div>
 </main>`,
-    APP_SCRIPT,
+    `var BASE = ${JSON.stringify(base)};${APP_SCRIPT}`,
   );
 }
 
@@ -188,7 +188,7 @@ const APP_SCRIPT = `
   function clearError() { msg.classList.add("hidden"); }
 
   function api(method, path, body) {
-    return fetch("/admin/api/" + path, {
+    return fetch(BASE + "/api/" + path, {
       method: method,
       headers: body ? { "content-type": "application/json" } : {},
       body: body ? JSON.stringify(body) : undefined,
@@ -227,7 +227,7 @@ const APP_SCRIPT = `
     var conGramos = vendidas.filter(function (v) { return num(v.gramos) > 0 && num(v.valor) > 0; });
     var ventaMedida = conGramos.reduce(function (s, v) { return s + num(v.valor); }, 0);
     var costoMedido = conGramos.reduce(function (s, v) { return s + num(v.gramos) / 1000 * costoKg; }, 0);
-    var margen = ventaMedida > 0 ? Math.round((ventaMedida - costoMedido) / ventaMedida * 100) : null;
+    var margen = ventaMedida > 0 && costoKg > 0 ? Math.round((ventaMedida - costoMedido) / ventaMedida * 100) : null;
     var stock = 0, sinPesar = 0;
     data.rollos.forEach(function (r) {
       if (r.estado === "Agotado") return;

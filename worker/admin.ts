@@ -25,6 +25,8 @@ interface D1Like {
 export interface AdminEnv {
   DB?: D1Like;
   ADMIN_PASSWORD?: string;
+  /** Ruta del panel. Por defecto /admin; se puede cambiar por una ruta discreta. */
+  ADMIN_PATH?: string;
 }
 
 const SESSION_COOKIE = "ren3d_admin";
@@ -133,9 +135,22 @@ async function ensureSchema(db: D1Like): Promise<void> {
   schemaReady = true;
 }
 
-/** Punto de entrada: devuelve una respuesta para cualquier ruta bajo /admin. */
+/** Ruta base del panel: la variable ADMIN_PATH si es válida, o /admin. */
+export function adminBasePath(env: AdminEnv): string {
+  const custom = (env.ADMIN_PATH ?? "").trim().replace(/\/+$/, "");
+  return /^\/[a-z0-9][a-z0-9\-/]{2,60}$/i.test(custom) ? custom : "/admin";
+}
+
+/** Indica si la ruta pedida pertenece al panel. */
+export function isAdminPath(pathname: string, env: AdminEnv): boolean {
+  const base = adminBasePath(env);
+  return pathname === base || pathname.startsWith(`${base}/`);
+}
+
+/** Punto de entrada: devuelve una respuesta para cualquier ruta bajo el panel. */
 export async function handleAdmin(request: Request, env: AdminEnv): Promise<Response> {
   const url = new URL(request.url);
+  const base = adminBasePath(env);
   const nonce = randomToken(16);
 
   if (!env.ADMIN_PASSWORD || env.ADMIN_PASSWORD.length < 8) {
@@ -161,7 +176,8 @@ export async function handleAdmin(request: Request, env: AdminEnv): Promise<Resp
     );
   }
 
-  const path = url.pathname.replace(/\/+$/, "") || "/admin";
+  // Se trabaja con la ruta relativa al panel: "" es la portada, "/login", "/api/...".
+  const path = url.pathname.slice(base.length).replace(/\/+$/, "");
   const isWrite = request.method !== "GET" && request.method !== "HEAD";
   if (isWrite && !sameOrigin(request, url)) {
     return json({ error: "Origen no permitido" }, 403);
@@ -169,28 +185,31 @@ export async function handleAdmin(request: Request, env: AdminEnv): Promise<Resp
 
   await ensureSchema(env.DB);
 
-  if (path === "/admin/login" && request.method === "POST") {
-    return login(request, env, env.DB);
+  if (path === "/login" && request.method === "POST") {
+    return login(request, env, env.DB, base);
   }
 
   const authed = await isAuthed(request, env.ADMIN_PASSWORD);
 
-  if (path === "/admin/logout" && request.method === "POST") {
-    return redirect("/admin", clearCookie());
+  if (path === "/logout" && request.method === "POST") {
+    return redirect(base, clearCookie(base));
   }
 
-  if (path === "/admin") {
+  if (path === "") {
     if (request.method !== "GET") return json({ error: "Método no permitido" }, 405);
-    return html(authed ? adminAppPage(nonce) : adminLoginPage(nonce, url.searchParams.get("e")), nonce);
+    return html(
+      authed ? adminAppPage(nonce, base) : adminLoginPage(nonce, base, url.searchParams.get("e")),
+      nonce,
+    );
   }
 
   if (!authed) return json({ error: "Sesión vencida" }, 401);
 
   try {
-    if (path === "/admin/api/datos" && request.method === "GET") {
+    if (path === "/api/datos" && request.method === "GET") {
       return json(await readAll(env.DB));
     }
-    const match = path.match(/^\/admin\/api\/(ventas|compras|rollos)(?:\/(\d+))?$/);
+    const match = path.match(/^\/api\/(ventas|compras|rollos)(?:\/(\d+))?$/);
     if (match) {
       const table = match[1];
       const id = match[2] ? Number(match[2]) : null;
@@ -377,7 +396,7 @@ async function readBody(request: Request): Promise<Record<string, unknown>> {
 
 // ---------------------------------------------------------------- acceso
 
-async function login(request: Request, env: AdminEnv, db: D1Like): Promise<Response> {
+async function login(request: Request, env: AdminEnv, db: D1Like, base: string): Promise<Response> {
   const ip = request.headers.get("cf-connecting-ip") ?? "desconocida";
   const recent = await db
     .prepare(
@@ -387,7 +406,7 @@ async function login(request: Request, env: AdminEnv, db: D1Like): Promise<Respo
     .bind(ip, `-${FAILED_LOGIN_WINDOW_MINUTES} minutes`)
     .first<{ total: number }>();
   if ((recent?.total ?? 0) >= MAX_FAILED_LOGINS) {
-    return redirect("/admin?e=bloqueo");
+    return redirect(`${base}?e=bloqueo`);
   }
 
   const form = await request.formData().catch(() => null);
@@ -398,14 +417,14 @@ async function login(request: Request, env: AdminEnv, db: D1Like): Promise<Respo
       db.prepare("INSERT INTO admin_intentos (ip) VALUES (?)").bind(ip),
       db.prepare("DELETE FROM admin_intentos WHERE creado < datetime('now', '-1 day')"),
     ]);
-    return redirect("/admin?e=clave");
+    return redirect(`${base}?e=clave`);
   }
 
   const expires = Date.now() + SESSION_DAYS * 86400 * 1000;
   const token = `${expires}.${await sign(String(expires), env.ADMIN_PASSWORD ?? "")}`;
   return redirect(
-    "/admin",
-    `${SESSION_COOKIE}=${token}; Path=/admin; Max-Age=${SESSION_DAYS * 86400}; HttpOnly; Secure; SameSite=Strict`,
+    base,
+    `${SESSION_COOKIE}=${token}; Path=${base}; Max-Age=${SESSION_DAYS * 86400}; HttpOnly; Secure; SameSite=Strict`,
   );
 }
 
@@ -418,8 +437,8 @@ async function isAuthed(request: Request, password: string): Promise<boolean> {
   return safeEqual(signature, await sign(expires, password));
 }
 
-function clearCookie(): string {
-  return `${SESSION_COOKIE}=; Path=/admin; Max-Age=0; HttpOnly; Secure; SameSite=Strict`;
+function clearCookie(base: string): string {
+  return `${SESSION_COOKIE}=; Path=${base}; Max-Age=0; HttpOnly; Secure; SameSite=Strict`;
 }
 
 /** Las escrituras solo se aceptan desde la misma página (protección CSRF). */
