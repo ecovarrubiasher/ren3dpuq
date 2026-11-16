@@ -345,8 +345,14 @@ export default {
       return resp;
     }
 
-    // admin.html / login.html must never be reachable by their real filenames
-    if (path === "/admin.html" || path === "/login.html") {
+    // admin.html / login.html must never be reachable by their real filenames,
+    // nor by the extensionless "clean URL" Cloudflare resolves them to
+    // (e.g. /admin -> admin.html), which used to bypass the session check.
+    if (
+      path === "/admin.html" || path === "/login.html" ||
+      path === "/admin" || path === "/admin/" ||
+      path === "/login" || path === "/login/"
+    ) {
       return new Response("Not found", { status: 404 });
     }
 
