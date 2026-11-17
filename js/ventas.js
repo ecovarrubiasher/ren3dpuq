@@ -268,14 +268,36 @@
     return el("div", { class: "admin-list-card" }, [
       el("h2", { text: title }),
       rows.length ? el("div", { class: "v-scroll" }, [el("table", { class: "v-table" }, [
-        el("thead", {}, [el("tr", {}, head.map(function (h) { return el("th", { class: h[1] || "", text: h[0] }); }))]),
+        el("thead", {}, [el("tr", {}, head.map(function (h) {
+          var label = h[0], extraClass = h[1] || "", onClick = h[2], suffix = h[3] || "";
+          var props = { class: extraClass + (onClick ? " v-sortable" : ""), text: label + suffix };
+          if (onClick) props.onclick = onClick;
+          return el("th", props);
+        }))]),
         el("tbody", {}, rows),
       ])]) : el("p", { class: "mute", text: empty }),
     ]);
   }
 
+  // null = orden normal (por fecha); "curso" agrupa "En curso" arriba;
+  // "vendido" agrupa "Vendido" arriba. Clic en el encabezado "Estado" rota entre los tres.
+  var ventasEstadoSort = null;
+
+  function toggleVentasEstadoSort() {
+    ventasEstadoSort = ventasEstadoSort === null ? "curso" : ventasEstadoSort === "curso" ? "vendido" : null;
+    render();
+  }
+
+  function sortedVentas() {
+    if (!ventasEstadoSort) return data.ventas;
+    var want = ventasEstadoSort === "curso" ? "En curso" : "Vendido";
+    var primero = data.ventas.filter(function (v) { return v.estado === want; });
+    var despues = data.ventas.filter(function (v) { return v.estado !== want; });
+    return primero.concat(despues);
+  }
+
   function renderVentas(view) {
-    var rows = data.ventas.map(function (v) {
+    var rows = sortedVentas().map(function (v) {
       return el("tr", {}, [
         el("td", { text: v.fecha || "—" }),
         el("td", {}, [v.producto, v.nota ? el("div", { class: "mute", text: v.nota }) : null]),
@@ -286,8 +308,10 @@
         ops("ventas", v),
       ]);
     });
+    var estadoSuffix = ventasEstadoSort === "curso" ? " ▲ en curso" : ventasEstadoSort === "vendido" ? " ▲ vendido" : " ⇅";
     view.replaceChildren(buildForm("ventas"), listCard("Ventas (" + data.ventas.length + ")",
-      [["Fecha"], ["Producto"], ["Cant.", "v-num"], ["Valor", "v-num"], ["Filamento", "v-num"], ["Estado"], [""]], rows, "Todavía no hay ventas."));
+      [["Fecha"], ["Producto"], ["Cant.", "v-num"], ["Valor", "v-num"], ["Filamento", "v-num"],
+        ["Estado", "", toggleVentasEstadoSort, estadoSuffix], [""]], rows, "Todavía no hay ventas."));
   }
 
   function renderCompras(view) {

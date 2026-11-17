@@ -62,6 +62,8 @@
 .v-table{width:100%; border-collapse:collapse; font-size:.88rem;}
 .v-table th, .v-table td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--card-border); vertical-align:top;}
 .v-table th{font-size:.72rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); white-space:nowrap;}
+.v-table th.v-sortable{cursor:pointer; user-select:none;}
+.v-table th.v-sortable:hover{color:var(--white);}
 .v-num, th.v-num{text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums;}
 .v-ops{white-space:nowrap; text-align:right;}
 .v-ops .btn{padding:6px 12px; font-size:.78rem;}
