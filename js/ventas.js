@@ -314,8 +314,45 @@
         ["Estado", "", toggleVentasEstadoSort, estadoSuffix], [""]], rows, "Todavía no hay ventas."));
   }
 
+  // Ordenamiento de la tabla de Compras: clic en un encabezado ordena por esa
+  // columna (asc), un segundo clic invierte a desc, y cambiar de columna
+  // reinicia a asc.
+  var comprasSort = { col: null, dir: 1 };
+
+  var COMPRAS_SORT_GETTERS = {
+    fecha: function (c) { return c.fecha || ""; },
+    categoria: function (c) { return (c.categoria || "").toLowerCase(); },
+    detalle: function (c) { return (c.detalle || "").toLowerCase(); },
+    kg: function (c) { return num(c.kg); },
+    envio: function (c) { return num(c.envio); },
+    total: function (c) { return totalCompra(c); },
+  };
+
+  function toggleComprasSort(col) {
+    if (comprasSort.col === col) comprasSort.dir *= -1;
+    else { comprasSort.col = col; comprasSort.dir = 1; }
+    render();
+  }
+
+  function sortedCompras() {
+    if (!comprasSort.col) return data.compras;
+    var get = COMPRAS_SORT_GETTERS[comprasSort.col];
+    var dir = comprasSort.dir;
+    return data.compras.slice().sort(function (a, b) {
+      var va = get(a), vb = get(b);
+      if (va < vb) return -1 * dir;
+      if (va > vb) return 1 * dir;
+      return 0;
+    });
+  }
+
+  function comprasHead(label, col, extraClass) {
+    var suffix = comprasSort.col === col ? (comprasSort.dir === 1 ? " ▲" : " ▼") : "";
+    return [label, extraClass || "", function () { toggleComprasSort(col); }, suffix];
+  }
+
   function renderCompras(view) {
-    var rows = data.compras.map(function (c) {
+    var rows = sortedCompras().map(function (c) {
       return el("tr", {}, [
         el("td", { text: c.fecha || "—" }),
         el("td", {}, [c.categoria, el("div", { class: "mute", text: [c.proveedor, c.pedido ? "#" + c.pedido : ""].filter(Boolean).join(" · ") })]),
@@ -327,7 +364,16 @@
       ]);
     });
     view.replaceChildren(buildForm("compras"), listCard("Compras (" + data.compras.length + ")",
-      [["Fecha"], ["Categoría"], ["Detalle"], ["Filamento", "v-num"], ["Envío", "v-num"], ["Total", "v-num"], [""]], rows, "Todavía no hay compras."));
+      [
+        comprasHead("Fecha", "fecha"),
+        comprasHead("Categoría", "categoria"),
+        comprasHead("Detalle", "detalle"),
+        comprasHead("Filamento", "kg", "v-num"),
+        comprasHead("Envío", "envio", "v-num"),
+        comprasHead("Total", "total", "v-num"),
+        [""],
+      ],
+      rows, "Todavía no hay compras."));
   }
 
   function renderRollos(view) {
