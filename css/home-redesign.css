@@ -239,7 +239,12 @@ svg{width:20px; height:20px;}
   border:1px solid var(--card-border);
   aspect-ratio:16/11;
 }
-.hero-collage-main img{width:100%; height:100%; object-fit:cover;}
+.hero-collage-main img{
+  width:100%; height:100%; object-fit:cover;
+  object-position:50% 28%;
+  transition:transform .5s ease;
+}
+.hero-collage-main:hover img, .hero-collage-sm:hover img{transform:scale(1.06);}
 .hero-collage-caption{
   position:absolute; left:14px; bottom:14px;
   background:rgba(10,10,10,.78);
@@ -257,7 +262,7 @@ svg{width:20px; height:20px;}
   border:1px solid var(--card-border);
   aspect-ratio:1/1;
 }
-.hero-collage-sm img{width:100%; height:100%; object-fit:cover;}
+.hero-collage-sm img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
 
 /* ===== Trust bar ===== */
 .trust-bar{
@@ -312,7 +317,9 @@ svg{width:20px; height:20px;}
 .category-card:hover{transform:translateY(-4px); border-color:var(--red);}
 .category-card img{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition:transform .5s ease;
 }
+.category-card:hover img{transform:scale(1.08);}
 .category-card::after{
   content:'';
   position:absolute; inset:0;
@@ -402,7 +409,9 @@ svg{width:20px; height:20px;}
 }
 .product-media img{
   width:100%; height:100%; object-fit:cover;
+  transition:transform .5s ease;
 }
+.product-card:hover .product-media img{transform:scale(1.08);}
 .product-media .media-fallback{
   position:absolute; inset:0;
   display:flex; align-items:center; justify-content:center;
@@ -604,7 +613,8 @@ svg{width:20px; height:20px;}
   border:1px solid var(--card-border);
   aspect-ratio:1/1;
 }
-.custom-grid-item img{width:100%; height:100%; object-fit:cover;}
+.custom-grid-item img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+.custom-grid-item:hover img{transform:scale(1.08);}
 
 /* ===== Instagram section ===== */
 .instagram-section{padding:90px 0;}
@@ -622,11 +632,18 @@ svg{width:20px; height:20px;}
   grid-template-columns:repeat(3, 1fr);
   gap:10px;
 }
-.instagram-grid img{
-  aspect-ratio:1/1; object-fit:cover;
+.instagram-grid picture{
+  display:block;
+  aspect-ratio:1/1;
   border-radius:10px;
   border:1px solid var(--card-border);
+  overflow:hidden;
 }
+.instagram-grid img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .5s ease;
+}
+.instagram-grid picture:hover img{transform:scale(1.08);}
 
 /* ===== FAQ ===== */
 .faq-section{padding:90px 0;}
