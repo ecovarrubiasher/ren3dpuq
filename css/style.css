@@ -238,15 +238,28 @@ svg{width:20px; height:20px;}
   overflow:hidden;
   border:1px solid var(--card-border);
   aspect-ratio:16/11;
-  background:radial-gradient(circle at 50% 35%, rgba(227,20,27,.16), transparent 65%), var(--bg-soft);
+  background:var(--bg-soft);
+}
+.hero-collage-main::before{
+  content:'';
+  position:absolute; inset:-20px;
+  background:url("../images/webp/soporte-control-hadouken.webp") center/cover;
+  filter:blur(30px) brightness(.45) saturate(1.3);
+  transform:scale(1.1);
+}
+.hero-collage-main::after{
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 35%, rgba(227,20,27,.14), transparent 65%);
 }
 .hero-collage-main img{
+  position:relative; z-index:1;
   width:100%; height:100%; object-fit:contain;
   transition:transform .5s ease;
 }
 .hero-collage-main:hover img, .hero-collage-sm:hover img{transform:scale(1.06);}
 .hero-collage-caption{
-  position:absolute; left:14px; bottom:14px;
+  position:absolute; left:14px; bottom:14px; z-index:2;
   background:rgba(10,10,10,.78);
   border:1px solid var(--card-border);
   color:var(--white);
